@@ -1,0 +1,40 @@
+﻿@model FormListModel
+<p>
+    You can update your form presentation and fill forms in this applications
+</p>
+<p>
+    Fill forms:
+        @for (var i = 0; i < Model.FormList.Count; i++)
+        {
+            var form = Model.FormList[i];
+            <div>@form.Title</div>
+            <ul>
+                <li><a href="/Home/FormResponse?formName=@form.Name&id=new">Fill New Form</a></li>
+                @foreach (var obj in Model.GetObjectsByType(form.Name))
+                {
+                    <li><a href="/Home/FormResponse?formName=@form.Name&id=@obj.Id">Edit: @obj.ToString()</a></li>
+                }
+            </ul>
+        }
+    </ul>
+</p>
+<p>
+    Edit form presentation (as a content manager):
+    <ul>
+        @for (var i = 0; i < Model.FormList.Count; i++)
+        {
+            var form = Model.FormList[i];
+            <li><a href="/Home/EditForm?formName=@form.Name">@form.Title</a></li>
+        }
+    </ul>
+</p>
+<p>
+    Edit form presentation (as an admin, without restrictions):
+    <ul>
+        @for (var i = 0; i < Model.FormList.Count; i++)
+        {
+            var form = Model.FormList[i];
+            <li><a href="/Home/EditForm?formName=@form.Name&isAdmin=true">@form.Title</a></li>
+        }
+    </ul>
+</p>

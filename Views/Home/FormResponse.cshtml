@@ -1,0 +1,27 @@
+﻿@model FormResponseModel
+<script src="https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js"></script>
+<script src="https://unpkg.com/survey-core/survey.core.min.js"></script>
+<script src="https://unpkg.com/survey-core/survey.i18n.min.js"></script>
+<script src="https://unpkg.com/survey-knockout-ui/survey-knockout-ui.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/survey-core/defaultV2.min.css" />
+<script src="~/js/form_api.js" asp-append-version="true"></script>
+<script src="~/js/surveyjs.js" asp-append-version="true"></script>
+@{
+    ViewData["Title"] = "Fill Form: " + Model.FormName;
+}
+<div id="surveyElement" style="display: inline-block; width: 100%;">
+    <div id="idLoading">Loading...</div>
+    <survey params="survey: model"></survey>
+</div>
+<script>
+    loadFormAndData("@Model.FormName", "@Model.Id", showForm);
+    function showForm(json, data) {
+        document.getElementById("idLoading").style.display = "none";
+        const survey = new SurveyKnockout.SurveyModel(json);
+        setupSurveyModel(survey, "@Model.FormName");
+        survey.data = data;
+        ko.applyBindings({
+            model: survey
+        }, document.getElementById("surveyElement"));
+    }
+</script>

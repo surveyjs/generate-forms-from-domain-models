@@ -1,0 +1,653 @@
+{
+  "title": "Patient Assessment Form",
+  "logoPosition": "right",
+  "focusFirstQuestionAutomatic": false,
+  "checkErrorsMode": "onValueChanged",
+  "pages": [
+    {
+      "name": "PatientInformation",
+      "title": "Patient information",
+      "navigationTitle": "Patient information",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "patient-information",
+          "title": "All fields with an asterisk (*) are required fields, and must be filled out in order to process the information in strict confidentiality.",
+          "elements": [
+            {
+              "type": "text",
+              "name": "FirstName",
+              "title": "First name",
+              "isRequired": true
+            },
+            {
+              "type": "text",
+              "name": "LastName",
+              "startWithNewLine": false,
+              "title": "Last name",
+              "isRequired": true
+            },
+            {
+              "type": "text",
+              "name": "SSN",
+              "title": "Social Security number",
+              "requiredErrorText": "You SSN must be a 9-digit number.",
+              "isRequired": true
+            },
+            {
+              "type": "text",
+              "name": "BirthDate",
+              "startWithNewLine": false,
+              "title": "Date of birth",
+              "isRequired": true,
+              "inputType": "date"
+            },
+            {
+              "type": "text",
+              "name": "Concerns",
+              "title": "List any concerns you want to talk about during your visit"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HealthHistory",
+      "title": "Health history",
+      "navigationTitle": "Health history",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "health-history",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "Diabetes",
+              "title": "Do you have diabetes?",
+              "startWithNewLine": false
+            },
+            {
+              "type": "boolean",
+              "name": "HighBloodPressure",
+              "title": "High blood pressure?",
+              "startWithNewLine": false
+            },
+            {
+              "type": "boolean",
+              "name": "HighCholesterol",
+              "title": "High cholesterol?",
+              "startWithNewLine": false
+            },
+            {
+              "type": "comment",
+              "name": "OtherHealthConditions",
+              "title": "Do you have other health conditions?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SocialHistory",
+      "title": "Social history",
+      "navigationTitle": "Social history",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "social-history",
+          "elements": [
+            {
+              "type": "panel",
+              "name": "smoking",
+              "elements": [
+                {
+                  "type": "radiogroup",
+                  "name": "Cigarettes",
+                  "title": "Do you smoke cigarettes?",
+                  "choices": [
+                    {
+                      "value": "never",
+                      "text": "Never"
+                    },
+                    {
+                      "value": "yes",
+                      "text": "Yes"
+                    },
+                    {
+                      "value": "quit",
+                      "text": "Quit"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "name": "CigarettesPacksPerDay",
+                  "visibleIf": "{Cigarettes} = 'yes'",
+                  "title": "How many packs a day?",
+                  "inputType": "number",
+                  "min": 0
+                },
+                {
+                  "name": "date-quit",
+                  "title": "CigarettesDateQuit",
+                  "inputType": "date",
+                  "maxValueExpression": "today()",
+                  "visibleIf": "{Cigarettes} = 'quit'"
+                },
+                {
+                  "name": "CigarettesYearsSmoked",
+                  "title": "Years smoked",
+                  "inputType": "number",
+                  "min": 0,
+                  "visibleIf": "{Cigarettes} = 'quit'"
+                },
+                {
+                  "type": "boolean",
+                  "name": "CigarettesVape",
+                  "title": "Do you vape (e-cigarettes)?"
+                }
+              ]
+            },
+            {
+              "type": "panel",
+              "name": "alcohol-use-history",
+              "elements": [
+                {
+                  "type": "boolean",
+                  "name": "Alcohol",
+                  "title": "Do you drink alcohol?"
+                },
+                {
+                  "type": "text",
+                  "name": "DrinksPerWeek",
+                  "inputType": "number",
+                  "visibleIf": "{Alcohol} = true",
+                  "title": "How many drinks per week?"
+                }
+              ],
+              "startWithNewLine": false
+            },
+            {
+              "type": "panel",
+              "name": "drug-use-history",
+              "elements": [
+                {
+                  "type": "checkbox",
+                  "name": "RecreationalDrugs",
+                  "title": "Do you use recreational drugs?",
+                  "choices": [
+                    {
+                      "value": "rarely",
+                      "text": "Rarely"
+                    },
+                    {
+                      "value": "marijuana",
+                      "text": "Marijuana"
+                    },
+                    {
+                      "value": "cocaine",
+                      "text": "Cocaine"
+                    },
+                    {
+                      "value": "opioids",
+                      "text": "Opioids"
+                    }
+                  ],
+                  "showOtherItem": true,
+                  "otherPlaceholder": "Please specify... ",
+                  "otherText": "Other",
+                  "showNoneItem": true,
+                  "noneText": "Never",
+                  "colCount": 3
+                },
+                {
+                  "type": "text",
+                  "name": "DrugUseTimesPerMonth",
+                  "visibleIf": "{RecreationalDrugs} anyof ['rarely', 'marijuana', 'cocaine', 'opioids', 'other']",
+                  "title": "How many times per month",
+                  "description": "If you take different types of drugs, please specify the frequency of use for each in a 'drug - # times/month' format."
+                }
+              ]
+            },
+            {
+              "type": "panel",
+              "name": "personal-info",
+              "elements": [
+                {
+                  "type": "dropdown",
+                  "name": "Education",
+                  "title": "What is your highest level of education completed?",
+                  "choices": [
+                    {
+                      "value": "high-school",
+                      "text": "High School"
+                    },
+                    {
+                      "value": "trade-school",
+                      "text": "Trade School"
+                    },
+                    {
+                      "value": "college",
+                      "text": "College"
+                    },
+                    {
+                      "value": "post-graduate",
+                      "text": "Post-graduate degree(s)"
+                    }
+                  ]
+                },
+                {
+                  "type": "dropdown",
+                  "name": "MaritalStatus",
+                  "title": "What is your marital status?",
+                  "choices": [
+                    {
+                      "value": "married",
+                      "text": "Married"
+                    },
+                    {
+                      "value": "partnership",
+                      "text": "Partnership"
+                    },
+                    {
+                      "value": "divorced",
+                      "text": "Divorced"
+                    },
+                    {
+                      "value": "separated",
+                      "text": "Separated"
+                    },
+                    {
+                      "value": "single",
+                      "text": "Single"
+                    },
+                    {
+                      "value": "widow",
+                      "text": "Widow(er)"
+                    }
+                  ]
+                },
+                {
+                  "type": "panel",
+                  "name": "sexual-life",
+                  "elements": [
+                    {
+                      "type": "boolean",
+                      "name": "SexuallyActive",
+                      "title": "Are you sexually active?"
+                    },
+                    {
+                      "type": "text",
+                      "name": "SexualPartnersNumber",
+                      "title": "How many sexual partners do you have?",
+                      "inputType": "number",
+                      "min": 0
+                    },
+                    {
+                      "type": "radiogroup",
+                      "name": "SexualPartnersGender",
+                      "titleLocation": "hidden",
+                      "choices": [
+                        {
+                          "value": "men",
+                          "text": "Men"
+                        },
+                        {
+                          "value": "women",
+                          "text": "Women"
+                        },
+                        {
+                          "value": "both",
+                          "text": "Both"
+                        }
+                      ],
+                      "colCount": 3
+                    },
+                    {
+                      "type": "boolean",
+                      "name": "Contraception",
+                      "title": "Do you use contraception?"
+                    },
+                    {
+                      "type": "comment",
+                      "name": "ContraceptionComment",
+                      "title": "What type of contraception do you use?",
+                      "visibleIf": "{Contraception} = true"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "panel",
+              "name": "employment-exercises-children",
+              "startWithNewLine": false,
+              "elements": [
+                {
+                  "type": "radiogroup",
+                  "name": "Employment",
+                  "title": "Are you employed?",
+                  "choices": [
+                    {
+                      "value": "yes",
+                      "text": "Yes"
+                    },
+                    {
+                      "value": "no",
+                      "text": "No"
+                    },
+                    {
+                      "value": "retired",
+                      "text": "Retired"
+                    }
+                  ],
+                  "colCount": 3
+                },
+                {
+                  "type": "comment",
+                  "name": "EmploymentComment",
+                  "title": "Type of work"
+                },
+                {
+                  "type": "panel",
+                  "name": "physical-activity",
+                  "elements": [
+                    {
+                      "type": "boolean",
+                      "name": "DoExercise",
+                      "title": "Do you exercise?"
+                    },
+                    {
+                      "type": "text",
+                      "name": "ExerciseActivityType",
+                      "title": "Type of activity",
+                      "visibleIf": "{DoExercise} = true"
+                    },
+                    {
+                      "type": "text",
+                      "name": "ExerciseActivityFrequency",
+                      "title": "How often?",
+                      "visibleIf": "{DoExercise} = true"
+                    },
+                    {
+                      "type": "text",
+                      "name": "ExerciseActivityDuration",
+                      "title": "How long per activity?",
+                      "visibleIf": "{DoExercise} = true"
+                    }
+                  ]
+                },
+                {
+                  "type": "panel",
+                  "name": "children",
+                  "elements": [
+                    {
+                      "type": "boolean",
+                      "name": "HaveChildren",
+                      "title": "Do you have children?"
+                    },
+                    {
+                      "type": "text",
+                      "name": "ChildrenNumber",
+                      "title": "# of children",
+                      "inputType": "number",
+                      "visibleIf": "{HaveChildren} = true"
+                    },
+                    {
+                      "type": "text",
+                      "name": "ChildrenAges",
+                      "title": "Their ages",
+                      "visibleIf": "{HaveChildren} = true"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SurgicalHistory",
+      "title": "Surgical history / recent hospitalizations",
+      "navigationTitle": "Surgical history",
+      "elements": [
+        {
+          "type": "comment",
+          "name": "SurgeryDescription",
+          "title": "Date and type of surgery / procedure"
+        }
+      ]
+    },
+    {
+      "name": "FamilyHistory",
+      "title": "Family history",
+      "navigationTitle": "Family history",
+      "elements": [
+        {
+          "type": "matrixdynamic",
+          "name": "FamilyHistory",
+          "cellType": "text",
+          "titleLocation": "hidden",
+          "rowCount":  1,
+          "columns": [
+            {
+              "name": "Relation"
+            },
+            {
+              "name": "HealthConditions",
+              "title": "Health conditions"
+            },
+            {
+              "name": "CancerHistory",
+              "title": "Family history of cancer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PreventiveCare",
+      "title": "Preventive care",
+      "navigationTitle": "Preventive care",
+      "elements": [
+        {
+          "type": "panel",
+          "name": "preventive-care",
+          "elements": [
+            {
+              "type": "matrixdynamic",
+              "name": "RecentShots",
+              "title": "Recent shots from a doctor or pharmacist",
+              "rowCount": 0,
+              "columns": [
+                {
+                  "name": "Name",
+                  "cellType": "dropdown",
+                  "isRequired": true,
+                  "choices": [
+                    {
+                      "value": "flu",
+                      "text": "Flu"
+                    },
+                    {
+                      "value": "shingles",
+                      "text": "Shingles"
+                    },
+                    {
+                      "value": "pneumonia",
+                      "text": "Pneumonia"
+                    },
+                    {
+                      "value": "tetanus",
+                      "text": "Tetanus"
+                    },
+                    {
+                      "value": "other",
+                      "text": "Other"
+                    }
+                  ]
+                },
+                {
+                  "name": "Date",
+                  "cellType": "text",
+                  "inputType": "date"
+                },
+                {
+                  "name": "Place",
+                  "cellType": "text"
+                }
+              ]
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "RecentTests",
+              "title": "Recent tests or procedures",
+              "rowCount": 0,
+              "columns": [
+                {
+                  "name": "Name",
+                  "isRequired":  true,
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "colonoscopy",
+                      "text": "Colonoscopy"
+                    },
+                    {
+                      "value": "cologuard",
+                      "text": "Cologuard"
+                    },
+                    {
+                      "value": "mammogram",
+                      "text": "Mammogram"
+                    },
+                    {
+                      "value": "pap",
+                      "text": "PAP"
+                    },
+                    {
+                      "value": "other",
+                      "text": "Other"
+                    }
+                  ]
+                },
+                {
+                  "name": "Date",
+                  "cellType":  "text",
+                  "inputType":  "date"
+                },
+                {
+                  "name": "Place",
+                  "cellType": "text"
+                }
+              ]
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "Specialists",
+              "cellType": "text",
+              "columns": [
+                {
+                  "name": "Provider",
+                  "title": "Provider's first and last name"
+                },
+                {
+                  "name": "Speciality",
+                  "title": "Speciality"
+                },
+                {
+                  "name": "City",
+                  "title": "Town/City"
+                }
+              ],
+              "rowCount": 1
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "Medications",
+              "cellType": "text",
+              "rowCount": 1,
+              "columns": [
+                {
+                  "name": "Name"
+                },
+                {
+                  "name": "Dose"
+                },
+                {
+                  "name": "TimesPerDay",
+                  "title": "Times per day"
+                }
+              ]
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "Allergies",
+              "cellType": "text",
+              "rowCount": 1,
+              "columns": [
+                {
+                  "name": "Type"
+                },
+                {
+                  "name": "Reaction"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Symptoms",
+      "elements": [
+        {
+          "type": "tagbox",
+          "name": "Symptoms",
+          "title": "Please select any symptoms you have now or have had in the past month.",
+          "choices": [
+            "Fever",
+            "Chills",
+            "Feeling poorly",
+            "Feeling tired",
+            "Weight gain",
+            "Weight loss",
+            "Chest pain",
+            "Heart pounding",
+            "Fast pulse",
+            "Slow pulse",
+            "Leg pain with exercise",
+            "Leg swelling",
+            "Joint pain",
+            "Neck pain",
+            "Joint swelling",
+            "Joint stiffness",
+            "Muscle aches",
+            "Back pain",
+            "Sores",
+            "Rash",
+            "Itching",
+            "Change in a mole",
+            "Unusual growth/spot"
+          ]
+        },
+        {
+          "type": "text",
+          "name": "CurrentDate",
+          "title": "Today's date:",
+          "titleLocation": "left",
+          "inputType": "date",
+          "defaultValueExpression": "today()"
+        }
+      ]
+    }
+  ],
+  "showProgressBar": "top",
+  "progressBarType": "buttons",
+  "completeText": "Submit",
+  "showPreviewBeforeComplete": "showAllQuestions",
+  "showQuestionNumbers": false,
+  "widthMode": "static",
+  "width": "1200px"
+}
