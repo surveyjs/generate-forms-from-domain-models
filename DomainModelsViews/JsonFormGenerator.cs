@@ -95,9 +95,15 @@ namespace SurveyJSAsFormLibrary.Code
         }
         private void setElementAttrByPropType(ExpandoObject el, PropertyInfo prop)
         {
-            if(this.isGenericListType(prop.PropertyType))
+            if (this.isGenericListType(prop.PropertyType))
             {
-                this.setListElementAttrByPropType(el, prop);
+                Type argType = prop.PropertyType.GetGenericArguments()[0];
+                if (argType == typeof(string) || IsNumericType(argType)) {
+                    el.TryAdd("type", "checkbox");
+                } else
+                {
+                    this.setListElementAttrByPropType(el, prop);
+                }
                 return;
             }
             string type = prop.PropertyType == typeof(bool) ? "boolean" : "text";
