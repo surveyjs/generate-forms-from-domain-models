@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Update="Data\nps-survey.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Data\patient-assessment.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
