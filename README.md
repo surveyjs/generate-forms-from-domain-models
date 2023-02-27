@@ -7,7 +7,7 @@ a different form for editing/filling forms without an application re-building/re
 There are 3 Domain Classes in this example:
  * [JobApplication](/DomainModels/JobApplication.cs)
  * [NPSSurvey](/DomainModels/NPSSurvey.cs)
- * [PatientAssessment](/DomainModels/PatientAssestment.cs)
+ * [PatientAssessment](/DomainModels/PatientAssessment.cs)
 
 ## Mock database
 To make an example simple, the current implementation doesn't work with a database.
@@ -18,7 +18,7 @@ You can change our [DataStorage](/DomainModels/DataStorage.cs) class to write th
 As an alternative, you can use an ORM library.
 
 ## Form List. Register a new form / DomainModel.
-To register a [DomainModelFormAttribute](/Code/FormAttributes) class attribute is added.
+To register a [DomainModelFormAttribute](/Code/FormAttributes.cs) class attribute is added.
 It has two parameters: "Name" and "Title".
 Here is the example of registering a new form:
 ````csharp
@@ -36,7 +36,7 @@ You can get a DomainModel type by form name by calling a static function `Domain
 [Form Response View](/Views/Home/FormResponse.cshtml) shows SurveyJS runner to fill out a form.
 It uses SurveyJS Library for knockout to render the form. We use it instead of React or Angular or Vue versions, because of simplicity.
 The page contains minimim code related to JavaScript framework implementation.
-The survey runner shows on loading JSON form definition and survey data, by calling [loadFormAndData](/wwwroot/js/form_api) function.
+The survey runner shows on loading JSON form definition and survey data, by calling [loadFormAndData](/wwwroot/js/form_api.js) function.
 The form (survey) model is setup in [setupSurveyModel](/wwwroot/js/surveyjs.js) function. 
 Inside this function, on submitting form the [saveFormData](wwwroot/js/form_api.js) function is calling.
 
