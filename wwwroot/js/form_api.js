@@ -33,7 +33,7 @@ function loadFormAndData(name, id, onLoad) {
         }
     };
 }
-function saveFormData(name, survey) {
+function saveFormData(name, survey, oncallback) {
     const url = apiUrl + "savedata";
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", url);
@@ -44,4 +44,11 @@ function saveFormData(name, survey) {
         "data": JSON.stringify(survey.data)
     };
     xhttp.send(JSON.stringify(data));
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            oncallback(true);
+        } else {
+            oncallback(false);
+        }
+    };
 }
