@@ -1,4 +1,5 @@
 {
+  "name": "PatientAssessment",
   "title": "Patient Assessment Form",
   "logoPosition": "right",
   "focusFirstQuestionAutomatic": false,
@@ -429,7 +430,7 @@
           "name": "FamilyHistory",
           "cellType": "text",
           "titleLocation": "hidden",
-          "rowCount":  1,
+          "rowCount": 1,
           "columns": [
             {
               "name": "Relation"
@@ -507,7 +508,7 @@
               "columns": [
                 {
                   "name": "Name",
-                  "isRequired":  true,
+                  "isRequired": true,
                   "cellType": "dropdown",
                   "choices": [
                     {
@@ -534,8 +535,8 @@
                 },
                 {
                   "name": "Date",
-                  "cellType":  "text",
-                  "inputType":  "date"
+                  "cellType": "text",
+                  "inputType": "date"
                 },
                 {
                   "name": "Place",

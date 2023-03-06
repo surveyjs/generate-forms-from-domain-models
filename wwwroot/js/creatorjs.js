@@ -1,4 +1,9 @@
-﻿function getCreatorOptions(isAdmin) {
+﻿//Add survey name property and set the maximum length for question and column names
+Survey.Serializer.addProperty("survey", { name: "name", maxLength: 50, required: true, category: "general", visibleIndex: 0 });
+Survey.Serializer.findProperty("question", "name").maxLength = 50;
+Survey.Serializer.findProperty("matrixdropdown", "name").maxLength = 50;
+
+function getCreatorOptions(isAdmin) {
     return {
         showLogicTab: true,
         isAutoSave: true,
@@ -12,8 +17,10 @@ function setupCreator(creator, formName, isAdmin) {
     }
     creator.readOnly = true;
     SurveyCreator.settings.designer.showAddQuestionButton = isAdmin;
-    if (!isAdmin) {
-        //Setup Creator for a content manager
+    if (isAdmin) {
+        setupCreatorForProductManager(creator);
+    }
+    else {
         setupCreatorForContentManager(creator);
     }
     loadForm(formName, creator);
@@ -51,6 +58,38 @@ function setupCreatorForContentManager(creator) {
             options.readOnly = options.obj.isQuestion || isObjColumn(options.obj);
         }
     });
+}
+function setupCreatorForProductManager(creator) {
+    ko.components.register("svc-tab-servercode", {
+        viewModel: {
+            createViewModel: (params, componentInfo) => {
+                const creator = params.creator;
+                var model = {
+                    generatedCode: generateDomainModelsCode(creator.survey)
+                };
+                return model;
+            }
+        },
+        template: `
+<textarea data-bind="value:generatedCode" style="width:100%;height:100%;padding:'5px'">
+</textarea>
+`
+    });
+    creator.onPropertyValidationCustomError.add((sender, options) => {
+        if (options.propertyName !== "name") return;
+        //We need to validate the name property for a question, the survey and a matrix column
+        if (options.obj.isQuestion || ["survey", "matrixdropdowncolumn"].indexOf(options.obj.getType()) > -1) {
+            if (!isNameCorrect(options.value)) {
+                options.error = "The current name can't be used as a property in the server code. Please correct it.";
+            }
+        }
+    })
+    const templatesPlugin = {
+        activate: () => { },
+        deactivate: () => { return true; }
+    };
+    //Add plug-in. We do nothing on activate/deactivate. Place it as first tab and set to "svc-tab-servercode" the component name
+    creator.addPluginTab("servercode", templatesPlugin, "Domain Models Code", "svc-tab-servercode", 0);
 }
 function isObjColumn(obj) {
     return !!obj && obj.getType() === "matrixdropdowncolumn";

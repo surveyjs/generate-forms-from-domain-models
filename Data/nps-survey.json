@@ -1,4 +1,5 @@
 {
+  "name":  "NPSSurvey",
   "completedHtmlOnCondition": [
     {
       "expression": "{NPSScore} <= 6 or {Rebuy} = false",
@@ -181,7 +182,7 @@
         {
           "type": "text",
           "name": "Email",
-          "inputType":  "email",
+          "inputType": "email",
           "visibleIf": "{Testimonial} = 'yes'",
           "title": {
             "default": "What is your email address?",
