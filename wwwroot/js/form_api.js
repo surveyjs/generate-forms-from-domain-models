@@ -1,4 +1,6 @@
 ﻿const apiUrl = "/api/form/";
+
+// Load a form JSON schema with a specified name and assign it to Survey Creator for editing.
 function loadForm(name, creator) {
     const url = apiUrl + "loadform?name=" + name;
     var xhttp = new XMLHttpRequest();
@@ -12,6 +14,8 @@ function loadForm(name, creator) {
         }
     };
 }
+
+// Save a form JSON schema in a database under a specified name.
 function saveForm(name, jsonAsText) {
     const url = apiUrl + "saveform";
     var xhttp = new XMLHttpRequest();
@@ -20,6 +24,7 @@ function saveForm(name, jsonAsText) {
     xhttp.send(JSON.stringify({ "name": name, "data": jsonAsText }));
 }
 
+// Load a form JSON schema with a specified name and form data (a single survey result) with a specified ID.
 function loadFormAndData(name, id, onLoad) {
     const url = apiUrl + "loadform_and_data?name=" + name + "&id=" + id;
     const xhttp = new XMLHttpRequest();
@@ -33,6 +38,8 @@ function loadFormAndData(name, id, onLoad) {
         }
     };
 }
+
+// Save form data (a single survey result) in a database.
 function saveFormData(name, survey, oncallback) {
     const url = apiUrl + "savedata";
     const xhttp = new XMLHttpRequest();

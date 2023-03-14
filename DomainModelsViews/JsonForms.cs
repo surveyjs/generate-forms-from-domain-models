@@ -22,7 +22,10 @@ namespace SurveyJSAsFormLibrary.Code
         public dynamic GetFormJSON()
         {
             if(!this.IsValid) return null;
+            // Get a form JSON schema of the current `FormType` from the database
             string json = DataStorage.GetForm(this.FormType);
+            // If the JSON schema is not found, load a pre-generated JSON schema
+            // from a file in the Data directory
             if (string.IsNullOrEmpty(json)) {
                 json = this.getJsonFromData();
             }

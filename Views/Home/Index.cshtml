@@ -4,19 +4,18 @@
 </p>
 <p>
     Fill forms:
-        @for (var i = 0; i < Model.FormList.Count; i++)
-        {
-            var form = Model.FormList[i];
-            <div>@form.Title</div>
-            <ul>
-                <li><a href="/Home/FormResponse?formName=@form.Name&id=new">Fill New Form</a></li>
-                @foreach (var obj in Model.GetObjectsByType(form.Name))
-                {
-                    <li><a href="/Home/FormResponse?formName=@form.Name&id=@obj.Id">Edit: @obj.ToString()</a></li>
-                }
-            </ul>
-        }
-    </ul>
+    @for (var i = 0; i < Model.FormList.Count; i++)
+    {
+        var form = Model.FormList[i];
+        <div>@form.Title</div>
+        <ul>
+            <li><a href="/Home/FormResponse?formName=@form.Name&id=new">Fill New Form</a></li>
+            @foreach (var obj in Model.GetObjectsByType(form.Name))
+            {
+                <li><a href="/Home/FormResponse?formName=@form.Name&id=@obj.Id">Edit: @obj.ToString()</a></li>
+            }
+        </ul>
+    }
 </p>
 <p>
     Edit form presentation (as a content manager):
