@@ -17,11 +17,14 @@ namespace SurveyJSAsFormLibrary.Code
         {
             this.type = type;
         }
+        // Generates a form JSON schema based upon a domain model type.
         public dynamic Generate()
         {
+            // Get domain model properties and their metadata
             List<PropertyInfo> properties = new List<PropertyInfo>();
             this.fillProperties(properties, this.type);
             if (properties.Count == 0) return new { };
+            // Arrays of form pages and elements (questions and panels)
             var pages = new List<dynamic>();
             var elements = new List<dynamic>();
             CustomAttributeData curPageAttr = getFormPageAttribute(properties[0]);
@@ -31,6 +34,8 @@ namespace SurveyJSAsFormLibrary.Code
                 if (i > 0)
                 {
                     CustomAttributeData pageAttr = getFormPageAttribute(prop);
+                    // If `pageAttr` has a value, it means that the previous page has run out of form elements,
+                    // and we should add it to the `pages` array
                     if (pageAttr != null)
                     {
                         pages.Add(new { title = this.getAttributeValueByProp(curPageAttr, "Title"), elements = elements });
@@ -38,12 +43,14 @@ namespace SurveyJSAsFormLibrary.Code
                         curPageAttr = pageAttr;
                     }
                 }
+                // Create a form element for the current domain model property
                 var element = this.createElementByProp(prop);
                 if(element != null)
                 {
                     elements.Add(element);
                 }
             }
+            // If the `elements` array is not empty, create a form page for its elements. This page will be the last.
             if (elements.Count > 0)
             {
                 pages.Add(new { title = this.getAttributeValueByProp(curPageAttr, "Title"), elements = elements });
@@ -61,6 +68,8 @@ namespace SurveyJSAsFormLibrary.Code
             }
             properties.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly));
         }
+        // Creates a form element based upon the metadata of a domain model property.
+        // You can expand this method to process more attributes.
         private dynamic createElementByProp(PropertyInfo prop)
         {
             var el = new ExpandoObject();
@@ -93,6 +102,7 @@ namespace SurveyJSAsFormLibrary.Code
             }
             return el;
         }
+        // Sets a form element type based upon the type of the passed domain model property.
         private void setElementAttrByPropType(ExpandoObject el, PropertyInfo prop)
         {
             if (this.isGenericListType(prop.PropertyType))
@@ -117,6 +127,7 @@ namespace SurveyJSAsFormLibrary.Code
                 el.TryAdd("inputType", "number");
             }
         }
+        // Sets the type of cells in a Matrix Dynamic question based upon the type of the passed domain model property.
         private void setListElementAttrByPropType(ExpandoObject el, PropertyInfo prop)
         {
             el.TryAdd("type", "matrixdynamic");
@@ -142,6 +153,8 @@ namespace SurveyJSAsFormLibrary.Code
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>);
         }
+
+        // Sets form element properties based upon `FormFieldAttribute` properties.
         private void setElementAttrByFormFieldAttr(ExpandoObject el, CustomAttributeData attr)
         {
             var choicesByUrl = getAttributeValueByProp(attr, "ChoicesByUrl");
