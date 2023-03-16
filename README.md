@@ -1,4 +1,4 @@
-# Generate Forms from Domain Models with SurveyJS
+# Generate Forms for Domain Models and Edit the Forms in a No-code Visual Editor
 
 This example demonstrates how to generate forms in JSON format based on strongly-typed domain models and vice versa. Generated forms can be displayed by SurveyJS Form Library and edited in Survey Creator. This solution will be beneficial for content and product managers who regularly create forms and for backend developers who implement domain models based on these forms.
 
