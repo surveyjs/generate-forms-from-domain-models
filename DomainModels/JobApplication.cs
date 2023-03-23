@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SurveyJSAsFormLibrary.DomainModels
 {
-    [DomainModelForm("job-application", "Job Application Form (auto generated)")]
+    [DomainModelForm("job-application", "Job Application Form")]
     public sealed class JobApplication: PersonInformation
     {
         [FormField(ChoicesByUrl = "https://surveyjs.io/api/CountriesExample")]

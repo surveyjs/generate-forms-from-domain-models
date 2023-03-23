@@ -1,71 +1,176 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
+﻿html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    margin: 0;
+    font-family: 'Lato';
+    font-style: normal;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+ul {
+    display: block;
+    list-style-type: none;
+    margin-block-start: unset;
+    margin-block-end: unset;
+    padding-inline-start: unset;
+}
+
+.logo-section {
+    padding: 64px 0px 0px;
+    display: flex;
+    justify-content: center;
+}
+.logo {
+    padding: 20px 0px 2px;
+}
+
+.index-section {
+    margin: auto;
+    padding: 96px 48px 192px;
+    max-width: 1080px;
+    min-height: calc(100vh - 660px);
+}
+
+.index-header {
+    padding: 0px 0px 48px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.index-header__title {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+    color: #161616;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.index-header__description {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #8A8A8A;
+    max-width: 864px;
+}
+
+.index-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0px;
+    gap: 48px;
+    flex-wrap: wrap;
+}
+
+.index-action {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    width: 328px;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.index-action-icon__background {
+    position: absolute;
+}
+
+.index-action-icon__image {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    margin: 28px;
+}
+
+.index-action__text {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    color: #161616;
+}
+
+.index-action-icon {
+    width: 96px;
+    height: 96px;
+    margin-bottom: 8px;
+}
+
+.index-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0px;
+    gap: 4px;
+}
+
+.index-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.index-form a {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    color: #505050;
+}
+
+.index-form-responses {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 0px;
+    gap: 4px;
+}
+
+.index-form-response a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px 12px;
+    background: #E7F7F4;
+    border-radius: 100px;
+    
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #505050;
+
+    text-decoration: none;
+}
+
+.index-footer {
+    
+}
+.index-footer-social {
+    display: flex;
+    padding: 32px 48px;
+    background: #F7F7F7;
+    justify-content: center;
+    gap: 16px;
+}
+
+.index-footer-social-link {
+    opacity: 0.5;
+}
+
+.index-footer__copyright {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    color: #676767;
+    padding: 48px;
+    background: #161616;
 }
