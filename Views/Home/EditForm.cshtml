@@ -12,7 +12,7 @@
 <script src="~/js/creatorjs.js" asp-append-version="true"></script>
 <script src="~/js/codegenerator.js" asp-append-version="true"></script>
 @{
-    ViewData["Title"] = "Edit Form: " + Model.FormName;
+    ViewData["Title"] = "Edit Form as " + (Model.IsAdmin ? "Administrator: " : "Content Manager: ") + Model.FormName;
 }
 <div id="surveyCreatorContainer" style="height: 100vh;"></div>
 <script>
