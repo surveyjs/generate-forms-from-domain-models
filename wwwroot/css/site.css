@@ -175,3 +175,7 @@ ul {
     padding: 48px;
     background: #161616;
 }
+
+.sd-root-modern {
+    min-height: 100vh;
+}
