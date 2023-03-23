@@ -1,4 +1,7 @@
 ﻿@model FormListModel
+@{
+    ViewData["Title"] = "No-Code Editor for Domain Models";
+}
 <section class="logo-section">
     <img class="logo" src="/images/logo.svg" />
 </section>
@@ -44,12 +47,12 @@
                 Edit a Form as Content Manager
             </div>
             <ul class="index-forms">
-            @for (var i = 0; i < Model.FormList.Count; i++) {
-                var form = Model.FormList[i];
+                @for (var i = 0; i < Model.FormList.Count; i++) {
+                    var form = Model.FormList[i];
                     <li class="index-form">
-                        <a href="/Home/FormResponse?formName=@form.Name&id=new">@form.Title</a>
+                        <a href="/Home/EditForm?formName=@form.Name">@form.Title</a>
                     </li>
-            }
+                }
             </ul>
         </div>
         <div class="index-action">
@@ -61,12 +64,12 @@
                 Edit a Form as Administrator
             </div>
             <ul class="index-forms">
-            @for (var i = 0; i < Model.FormList.Count; i++) {
-                var form = Model.FormList[i];
+                @for (var i = 0; i < Model.FormList.Count; i++) {
+                    var form = Model.FormList[i];
                     <li class="index-form">
-                        <a href="/Home/FormResponse?formName=@form.Name&id=new">@form.Title</a>
+                        <a href="/Home/EditForm?formName=@form.Name&isAdmin=true">@form.Title</a>
                     </li>
-            }
+                }
             </ul>
         </div>
     </div>
