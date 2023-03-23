@@ -150,6 +150,9 @@ ul {
 
     text-decoration: none;
 }
+.index-form-response a:hover {
+    background: #DDF4EF;
+}
 
 .index-footer {
     
