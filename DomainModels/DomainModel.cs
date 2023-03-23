@@ -8,7 +8,7 @@ namespace SurveyJSAsFormLibrary.DomainModels
         public string Id { get; set; }
         public override string ToString()
         {
-            return this.Id;
+            return "#" + this.Id;
         }
     }
 }
