@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SurveyJSAsFormLibrary.DomainModels
 {
-    [DomainModelForm("nps-survey", "NPS Survey (Domain Model without attributes)")]
+    [DomainModelForm("nps-survey", "NPS Survey (DM without attributes)")]
     public class NPSSurvey: DomainModel
     {
         public int NPSScore { get; set; }
