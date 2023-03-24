@@ -12,11 +12,11 @@
 <script src="~/js/creatorjs.js" asp-append-version="true"></script>
 <script src="~/js/codegenerator.js" asp-append-version="true"></script>
 @{
-    ViewData["Title"] = "Edit Form as " + (Model.IsAdmin ? "Administrator: " : "Content Manager: ") + Model.FormName;
+    ViewData["Title"] = "Edit Form as " + (Model.IsAdmin ? "Administrator: " : "Content Manager: ") + Model.FormTitle;
 }
 <div id="surveyCreatorContainer" style="height: 100vh;"></div>
 <script>
     const creator = new SurveyCreator.SurveyCreator(getCreatorOptions(false));
-    setupCreator(creator, "@Model.FormName", "@Model.IsAdmin" === "True");
+    setupCreator(creator, "@Model.FormTitle", "@Model.IsAdmin" === "True");
     creator.render("surveyCreatorContainer");
 </script>

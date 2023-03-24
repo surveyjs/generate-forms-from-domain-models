@@ -62,6 +62,12 @@ namespace SurveyJSAsFormLibrary.DomainModels
             domains.TryGetValue(name, out res);
             return res != null ? res.Type : null;
         }
+        public static string GetTitleByFormName(string name)
+        {
+            DomainModelInfo res;
+            domains.TryGetValue(name, out res);
+            return res != null ? res.Title : name;
+        }
         public static IList<DomainModelInfo> GetAllForms()
         {
             var list = new List<DomainModelInfo>();

@@ -644,8 +644,7 @@
       ]
     }
   ],
-  "showProgressBar": "top",
-  "progressBarType": "buttons",
+  "showTOC": true,
   "completeText": "Submit",
   "showPreviewBeforeComplete": "showAllQuestions",
   "showQuestionNumbers": false,
