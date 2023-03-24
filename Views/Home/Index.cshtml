@@ -1,39 +1,95 @@
 ﻿@model FormListModel
-<p>
-    You can update your form presentation and fill forms in this applications
-</p>
-<p>
-    Fill forms:
-    @for (var i = 0; i < Model.FormList.Count; i++)
-    {
-        var form = Model.FormList[i];
-        <div>@form.Title</div>
-        <ul>
-            <li><a href="/Home/FormResponse?formName=@form.Name&id=new">Fill New Form</a></li>
-            @foreach (var obj in Model.GetObjectsByType(form.Name))
-            {
-                <li><a href="/Home/FormResponse?formName=@form.Name&id=@obj.Id">Edit: @obj.ToString()</a></li>
-            }
-        </ul>
-    }
-</p>
-<p>
-    Edit form presentation (as a content manager):
-    <ul>
-        @for (var i = 0; i < Model.FormList.Count; i++)
-        {
-            var form = Model.FormList[i];
-            <li><a href="/Home/EditForm?formName=@form.Name">@form.Title</a></li>
-        }
-    </ul>
-</p>
-<p>
-    Edit form presentation (as an admin, without restrictions):
-    <ul>
-        @for (var i = 0; i < Model.FormList.Count; i++)
-        {
-            var form = Model.FormList[i];
-            <li><a href="/Home/EditForm?formName=@form.Name&isAdmin=true">@form.Title</a></li>
-        }
-    </ul>
-</p>
+@{
+    ViewData["Title"] = "No-Code Editor for Domain Models";
+}
+<section class="logo-section">
+    <img class="logo" src="/images/logo.svg" />
+</section>
+<section class="index-section">
+    <div class="index-header">
+        <h1 class="index-header__title">No-Code Editor for Domain Models</h1>
+        <div class="index-header__description">
+            Use SurveyJS to generate form JSON schemas based on domain model code and
+            edit the forms in a visual designer.
+        </div>
+    </div>
+    <div class="index-container">
+        <div class="index-action">
+            <div class="index-action-icon">
+                <img class="index-action-icon__background" src="~/images/circle.svg">
+                <img class="index-action-icon__image" src="~/images/run.svg">
+            </div>
+            <div class="index-action__text">
+                Fill Out a Form
+            </div>
+            <ul class="index-forms">
+                @for (var i = 0; i < Model.FormList.Count; i++) {
+                    var form = Model.FormList[i];
+                    <li class="index-form">
+                        <a href="/Home/FormResponse?formName=@form.Name&id=new">@form.Title</a>
+                        @if (Model.GetObjectsByType(form.Name).Count > 0) {
+                            <ul class="index-form-responses">
+                                @foreach (var obj in Model.GetObjectsByType(form.Name)) {
+                                    <li class="index-form-response"><a href="/Home/FormResponse?formName=@form.Name&id=@obj.Id">@obj.ToString()</a></li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="index-action">
+            <div class="index-action-icon">
+                <img class="index-action-icon__background" src="~/images/circle.svg">
+                <img class="index-action-icon__image" src="~/images/manage.svg">
+            </div>
+            <div class="index-action__text">
+                Edit a Form as Content Manager
+            </div>
+            <ul class="index-forms">
+                @for (var i = 0; i < Model.FormList.Count; i++) {
+                    var form = Model.FormList[i];
+                    <li class="index-form">
+                        <a href="/Home/EditForm?formName=@form.Name">@form.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="index-action">
+            <div class="index-action-icon">
+                <img class="index-action-icon__background" src="~/images/circle.svg">
+                <img class="index-action-icon__image" src="~/images/admin.svg">
+            </div>
+            <div class="index-action__text">
+                Edit a Form as Administrator
+            </div>
+            <ul class="index-forms">
+                @for (var i = 0; i < Model.FormList.Count; i++) {
+                    var form = Model.FormList[i];
+                    <li class="index-form">
+                        <a href="/Home/EditForm?formName=@form.Name&isAdmin=true">@form.Title</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="index-footer">
+    <div class="index-footer-social">
+        <a href="https://www.facebook.com/SurveyJS/" target="_blank" class="index-footer-social-link">
+            <img src="~/images/facebook.svg" />
+        </a>
+        <a href="https://github.com/surveyjs" target="_blank" class="index-footer-social-link">
+            <img src="~/images/github.svg" />
+        </a>
+        <a href="https://medium.com/@@surveyjs" target="_blank" class="index-footer-social-link">
+            <img src="~/images/medium.svg" />
+        </a>
+        <a href="https://twitter.com/surveyjs" target="_blank" class="index-footer-social-link">
+            <img src="~/images/twitter.svg" />
+        </a>
+    </div>
+    <div class="index-footer__copyright">
+        Copyright © 2023 Devsoft Baltic OÜ. All rights reserved.
+    </div>
+</section>
