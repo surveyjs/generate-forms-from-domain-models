@@ -17,6 +17,6 @@
 <div id="surveyCreatorContainer" style="height: 100vh;"></div>
 <script>
     const creator = new SurveyCreator.SurveyCreator(getCreatorOptions(false));
-    setupCreator(creator, "@Model.FormTitle", "@Model.IsAdmin" === "True");
+    setupCreator(creator, "@Model.FormName", "@Model.IsAdmin" === "True");
     creator.render("surveyCreatorContainer");
 </script>

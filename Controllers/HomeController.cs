@@ -30,7 +30,7 @@ namespace SurveyJSAsFormLibrary.Controllers
         public IActionResult EditForm(string formName, bool isAdmin = false)
         {
             string formTitle = DomainModelList.GetTitleByFormName(formName);
-            return View(new EditFormModel() { FormTitle = formTitle, IsAdmin = isAdmin });
+            return View(new EditFormModel() { FormName = formName, FormTitle = formTitle, IsAdmin = isAdmin });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
