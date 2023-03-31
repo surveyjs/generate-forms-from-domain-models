@@ -36,11 +36,16 @@ function setupCreatorForContentManager(creator) {
     // Hide the "Add Question" button from the design surface
     creator.showAddQuestionButton = false;
     creator.onElementAllowOperations.add((_, options) => {
-        if (!options.obj.isQuestion) return;
-        // Disallow content managers to change question types, delete questions, or copy them
+        // Disallow restricted users to change question types, delete questions, or copy them
         options.allowChangeType = false;
         options.allowCopy = false;
-        options.allowDelete = false;
+        const obj = options.obj;
+        if (obj.isQuestion) {
+            options.allowDelete = false;
+        }
+        if (obj.isPage || obj.isPanel) {
+            options.allowDelete = obj.questions.length === 0;
+        }
     });
     creator.onCollectionItemAllowOperations.add((_, options) => {
         // Disallow content managers to delete columns via adorners on the design surface
