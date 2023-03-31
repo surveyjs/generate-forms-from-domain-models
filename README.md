@@ -2,7 +2,7 @@
 
 This example demonstrates how to generate forms in JSON format based on strongly-typed domain models and vice versa. Generated forms can be displayed by SurveyJS Form Library and edited in Survey Creator. This solution will be beneficial for content and product managers who regularly create forms and for backend developers who implement domain models based on these forms.
 
-<!-- TODO: Add illustration -->
+![Generate Forms for Domain Models and Edit the Forms in a No-code Visual Editor](https://user-images.githubusercontent.com/18551316/227605125-24ca0d80-da93-4ec9-9bfd-0cd082808a93.png)
 
 This application was built using ASP.NET Core. Follow the same instructions if you need to implement this functionality with any other server-side framework.
 
@@ -43,7 +43,7 @@ SurveyJS ships with a tool that displays surveys and forms&mdash;[SurveyJS Form 
 
 In this project, SurveyJS Form Library displays JSON schemas that come from different sources. The "NPS Survey" and "Patient Assessment" forms are pre-generated and stored as JSON files in the [Data](/Data/) directory. The "Job Application" form is generated from the `JobApplication` domain model on the fly. If a form JSON schema has been edited, its most recent version is stored in a database (or [database emulator](/DomainModels/DataStorage.cs), as in this application). When Form Library requests a JSON schema of a certain type, the server first searches for the most recently edited schema of that type in the database. If the schema is not found, the server returns a pre-generated schema from one of the JSON files. If a file with a schema of that type is also absent, the server generates the schema on the fly. Refer to the following file to find methods that implement this logic: [JsonForms.cs](/DomainModelsViews/JsonForms.cs).
 
-<!-- TODO: Add illustration -->
+![The order of getting a JSON schema for display](https://user-images.githubusercontent.com/18551316/227605277-f740d804-f653-4b1b-ac7b-5fb2f92906fa.png)
 
 ## Edit JSON Schemas
 
