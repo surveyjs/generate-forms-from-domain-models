@@ -67,27 +67,25 @@ function setupCreatorForContentManager(creator) {
     });
 }
 
-const SERVER_CODE_TAB_COMPONENT_NAME = "svc-tab-servercode";
+const SERVER_CODE_TAB_COMPONENT_NAME = "SERVER_CODE_TAB_COMPONENT_NAME";
 
 // Product managers can make any changes in a form JSON schema.
 // If these changes require server-side code modification, backend developers can use generated code to adjust domain models.
 function setupCreatorForProductManager(creator) {
-    // Register a component that displays server-side code generated based upon the form JSON schema
-    ko.components.register(SERVER_CODE_TAB_COMPONENT_NAME, {
-        viewModel: {
-            createViewModel: (params) => {
-                const creator = params.creator;
-                var model = {
-                    generatedCode: generateDomainModelsCode(creator.survey)
-                };
-                return model;
-            }
-        },
-        template: `
-            <textarea data-bind="value:generatedCode" style="width:100%;height:100%;padding:'5px'">
-            </textarea>
-        `
-    });
+    class DomainCodeGeneratorTabComponent extends SurveyUI.Component {
+        render() {
+            const textAreaStyle = { width: "100%", heigth: "100%", padding: "5px" };
+            const generatedCode = generateDomainModelsCode(this.props.creator.survey)
+            return React.createElement("textarea", { style: textAreaStyle, value: generatedCode });
+        }
+    }
+    window.React = { createElement: SurveyUI.createElement };
+    SurveyUI.ReactElementFactory.Instance.registerElement(
+        SERVER_CODE_TAB_COMPONENT_NAME,
+        (props) => {
+            return React.createElement(DomainCodeGeneratorTabComponent, props);
+        }
+    );
     creator.onPropertyValidationCustomError.add((_, options) => {
         if (options.propertyName !== "name") return;
         // Validate the `name` property for the survey, questions, and matrix columns
